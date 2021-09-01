@@ -1,0 +1,475 @@
+/*
+ * Override default theme
+ */
+
+/* regular theme */
+:root {
+	/*
+	 * global
+	 */
+	/* --page-bg-color: white; */
+	/* --page-text-color: #3f3f46; */
+	/* --page-secondary-text-color: #a1a1aa; */
+	--page-highlight-color: #2563EB;
+	/* --page-error-color: #dc2626; */
+
+	/*
+	 * header
+	 */
+	/* --header-bg-color: var(--page-bg-color); */
+	/* --header-title-color: var(--page-text-color); */
+	/* --header-description-color: var(--page-secondary-text-color); */
+	/* --header-subscribe-color: var(--page-highlight-color); */
+	/* --header-control-color: #d4d4d8; */
+	--header-border-color: #71717A;
+
+	--sign-up-bg-color: #EFF6FF;
+
+	/*
+	 * content section
+	 */
+	/* --section-bg-color: #fafafa; */
+	--section-border-color: #D4D4D8;
+
+	/*
+	 * content card
+	 */
+	--card-bg-color: #FAFAFA;
+	/* --card-title-color: var(--page-text-color); */
+	/* --card-date-color: var(--page-secondary-text-color); */
+	/* --card-summary-color: #71717a; */
+	/* --card-info-color: var(--page-secondary-text-color); */
+	/* --card-link-color: var(--page-highlight-color); */
+	--card-empty-gradient-from: #2563EB;
+	--card-empty-gradient-to: #60A5FA;
+
+	/*
+	 * article
+	 */
+	/* --article-bg-color: var(--page-bg-color); */
+	/* --article-text-color: var(--page-text-color); */
+	/* --article-info-color: #71717a; */
+	/* --article-link-color: var(--page-highlight-color); */
+	/* --article-border-color: transparent; */
+	/* --article-block-bg-color: var(--section-bg-color); */
+
+	/*
+	 * footer
+	 */
+	/* --footer-bg-color: #18181b; */
+	--footer-title-color: var(--page-text-color);
+	--footer-text-color: #52525B;
+}
+
+/* dark theme override */
+.dark:root {
+	/* --page-bg-color: #18181b; */
+	--page-text-color: #f4f4f5;
+	/* --page-secondary-text-color: #a1a1aa; */
+	--page-highlight-color: #3B82F6;
+
+	--sign-up-bg-color: #1A2137;
+
+	/* --header-control-color: #71717a; */
+
+	/* --section-bg-color: #202023; */
+	--section-border-color: #52525B;
+
+	--card-bg-color: #202023;
+	/* --card-summary-color: #d4d4d8; */
+
+	/* --article-info-color: #d4d4d8; */
+
+	/* --footer-bg-color: black; */
+	--footer-text-color: #A1A1AA;
+}
+
+
+/*
+ * Global
+ */
+.Pinpoint.Blog_Page {
+	@apply flex flex-col min-h-screen;
+}
+
+.constraint {
+	@apply max-w-8xl mx-auto px-4 md:px-8;
+}
+
+.button {
+	@apply px-4 py-2 rounded-md font-semibold text-white;
+	background-color: var(--page-highlight-color);
+}
+
+
+/*
+ * Header
+ */
+.Pinpoint.Blog_Header {
+	@apply mb-16;
+}
+
+.Pinpoint.Blog_Header .content {
+	@apply py-8 flex flex-col border-b;
+	border-color: var(--header-border-color);
+}
+
+.Pinpoint.Blog_Header .content .static {
+	@apply flex-grow flex justify-between;
+}
+
+.Pinpoint.Blog_Header .logo {
+	@apply flex items-center;
+}
+
+.Pinpoint.Blog_Header .actions {
+	@apply hidden md:!flex mt-4 md:!mt-0 md:ml-8 justify-between md:justify-start items-center space-x-4;
+}
+
+.Pinpoint.Blog_Header .small-screen {
+	@apply mt-8 hidden md:!hidden;
+}
+.Pinpoint.Blog_Header .small-screen.visible {
+	@apply flex flex-col sm:!flex-row items-center md:!hidden;
+}
+
+.Pinpoint.Blog_Header .small-screen .left {
+	@apply w-full flex justify-between items-center;
+}
+
+.Pinpoint.Blog_Header .small-screen .sign-up {
+	@apply block w-full sm:!w-auto sm:ml-4 mt-5 sm:!mt-0 text-center flex-shrink-0;
+}
+
+
+/*
+ * Footer
+ */
+.Pinpoint.Blog_Footer {
+	@apply mt-16;
+	color: var(--footer-text-color);
+}
+
+.Pinpoint.Blog_Footer .content {
+	@apply py-8 flex flex-col md:!flex-row justify-center md:!justify-between items-center border-t border-gray-500 dark:border-gray-500;
+}
+
+.Pinpoint.Blog_Footer .site {
+	@apply flex-shrink-0 flex items-center;
+}
+
+.Pinpoint.Blog_Footer .site img {
+	@apply flex-shrink-0;
+}
+
+.Pinpoint.Blog_Footer .title {
+	@apply ml-4 text-2xl md:!text-3xl;
+	color: var(--footer-title-color);
+}
+
+.Pinpoint.Blog_Footer .Pinpoint.Social.Bar {
+	@apply mt-4 md:!mt-0 justify-center items-center;
+}
+
+.Pinpoint.Blog_Footer .Pinpoint.Social.Item svg {
+	@apply md:w-5 md:h-5;
+}
+
+.PoweredBy {
+	@apply py-4 flex items-center bg-gray-100 dark:bg-[#202023];
+}
+
+
+/*
+ * Sign up
+ */
+.Pinpoint.Blog_SignUp {
+	@apply my-16 py-12 md:py-16 transition-colors duration-200;
+	background-color: var(--sign-up-bg-color);
+}
+
+.Pinpoint.Blog_SignUp .content {
+	@apply flex flex-col md:flex-row md:justify-between items-start md:items-center;
+}
+.Pinpoint.Blog_SignUp .content .message {
+	@apply text-3xl font-semibold;
+}
+
+.Pinpoint.Blog_SignUp .sign-up {
+	@apply mt-10 md:my-0 md:ml-10 px-14 py-3 text-xl flex-shrink-0;
+}
+
+
+/*
+ * Pagination
+ */
+.Pinpoint.Blog_Pagination {
+	@apply my-16 flex-grow;
+}
+
+ .Pinpoint.Pagination {
+	@apply text-xl;
+}
+
+.Pinpoint.Pagination span {
+	@apply font-bold;
+}
+
+
+/*
+ * Group
+ */
+.Pinpoint.Blog_Group {
+	@apply my-32;
+}
+
+.Pinpoint.Blog_Group .constraint > .content {
+	@apply pt-8 border-t;
+	border-color: var(--section-border-color);
+}
+
+.Pinpoint.Blog_Group .heading {
+	@apply flex flex-wrap justify-between items-center;
+}
+
+.Pinpoint.Blog_Group .heading h2 {
+	@apply mr-8 flex-shrink-0 text-3xl font-bold leading-tight tracking-tight;
+}
+
+.Pinpoint.Blog_Group .heading a {
+	@apply flex-shrink-0 flex items-center font-bold;
+	color: var(--page-highlight-color);
+}
+
+.Pinpoint.Blog_Group .heading a .icon {
+	@apply ml-2;
+}
+
+
+/*
+ * Entries
+ */
+.Pinpoint.Blog_Entries {
+	@apply mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-y-16 md:gap-x-8;
+}
+
+.Pinpoint.Blog_Entries .entry {
+	@apply relative cursor-pointer transition-colors duration-200;
+}
+
+.Pinpoint.Blog_Entries .entry::before {
+	@apply hidden md:block absolute w-full h-full;
+	background-color: var(--card-bg-color);
+	z-index: -1;
+	content: ' ';
+}
+
+.Pinpoint.Blog_Entries .entry:hover {
+	color: var(--page-highlight-color);
+}
+
+.Pinpoint.Blog_Entries .entry img {
+	@apply object-cover w-full h-64 bg-gray-100 transition-opacity duration-200;
+}
+
+.Pinpoint.Blog_Entries .entry .no-image {
+	@apply h-64 transition-opacity duration-200;
+	background-image: linear-gradient(to right, var(--card-empty-gradient-from), var(--card-empty-gradient-to));
+}
+
+.Pinpoint.Blog_Entries .entry:hover img,
+.Pinpoint.Blog_Entries .entry:hover .no-image {
+	@apply opacity-80;
+}
+
+.Pinpoint.Blog_Entries .entry .content {
+	@apply pt-4 md:p-4;
+}
+
+.Pinpoint.Blog_Entries .entry .content h2 {
+	@apply mt-2 text-2xl font-bold leading-tight tracking-tight;
+}
+
+.Pinpoint.Blog_Entries .entry .content p {
+	@apply mt-2;
+}
+
+
+/*
+ * Metadata
+ */
+.Pinpoint.Blog_Metadata {
+	@apply flex flex-wrap items-center text-sm uppercase;
+}
+
+.Pinpoint.Blog_Metadata .Date {
+	@apply flex-shrink-0;
+}
+
+.Pinpoint.Blog_Metadata .separator {
+	@apply px-2 opacity-30;
+}
+
+
+/*
+ * Home
+ */
+.Pinpoint.Blog_Hero {
+
+}
+
+.Pinpoint.Blog_Hero .entry {
+	@apply relative cursor-pointer transition-colors duration-200 flex flex-col md:flex-row;
+}
+
+.Pinpoint.Blog_Hero .entry::before {
+	@apply hidden md:block absolute w-full h-full;
+	background-color: var(--card-bg-color);
+	z-index: -1;
+	content: ' ';
+}
+
+.Pinpoint.Blog_Hero .entry:hover {
+	color: var(--page-highlight-color);
+}
+
+.Pinpoint.Blog_Hero .entry img {
+	@apply md:w-1/2 h-64 md:h-96 object-cover transition-opacity duration-200;
+}
+
+.Pinpoint.Blog_Hero .entry .no-image {
+	@apply md:w-1/2 h-64 md:h-96 transition-opacity duration-200;
+	background-image: linear-gradient(to right, var(--card-empty-gradient-from), var(--card-empty-gradient-to));
+}
+
+.Pinpoint.Blog_Hero .entry:hover img,
+.Pinpoint.Blog_Hero .entry:hover .no-image {
+	@apply opacity-80;
+}
+
+.Pinpoint.Blog_Hero .entry .content {
+	@apply md:w-1/2 pt-4 md:p-8;
+}
+
+.Pinpoint.Blog_Hero .entry .content .Pinpoint.Blog_Metadata {
+	@apply text-lg md:text-xl;
+}
+
+.Pinpoint.Blog_Hero .entry h2 {
+	@apply mt-2 text-3xl md:text-4xl font-bold !leading-tight tracking-tight;
+}
+
+.Pinpoint.Blog_Hero .entry p {
+	@apply mt-2 md:mt-4 text-xl;
+}
+
+
+/*
+ * Entries Page / Seatch Results
+ */
+.Pinpoint.Blog_Entries_Page {
+
+}
+
+.Pinpoint.Blog_Search_Results {
+	@apply flex-grow;
+}
+
+.Pinpoint.Blog_Search_Results > .constraint > .content {
+	@apply flex flex-col;
+}
+
+.Pinpoint.Blog_Entries_Page .heading,
+.Pinpoint.Blog_Search_Results .heading {
+	@apply flex flex-wrap justify-between items-center;
+}
+
+.Pinpoint.Blog_Entries_Page .heading h2,
+.Pinpoint.Blog_Search_Results .heading h2 {
+	@apply text-3xl font-bold leading-tight tracking-tight flex-shrink-0;
+}
+
+.Pinpoint.Blog_Entries_Page .heading .page-indicator {
+	@apply font-normal text-base ml-2 transition-colors duration-200;
+	color: var(--page-secondary-text-color);
+}
+
+.Pinpoint.Blog_Search_Results .heading h2 {
+	@apply mr-8 font-normal;
+	color: var(--page-secondary-text-color);
+}
+
+.Pinpoint.Blog_Search_Results .heading .search-term {
+	@apply font-bold;
+	color: var(--page-text-color);
+}
+
+
+.Pinpoint.Blog_Entries_Page .heading a,
+.Pinpoint.Blog_Search_Results .heading a {
+	@apply flex-shrink-0 flex items-center font-bold;
+	color: var(--page-highlight-color);
+}
+
+
+.Pinpoint.Blog_Entries_Page .heading a .icon,
+.Pinpoint.Blog_Search_Results .heading a .icon {
+	@apply mr-2;
+}
+
+.loaderWrapper {
+	@apply relative mt-16 md:mt-32;
+}
+
+.Pinpoint.Loader {
+	@apply relative;
+}
+
+
+
+/*
+ * Entry
+ */
+.Pinpoint.Blog_Entry h1 {
+	@apply text-4xl md:!text-5xl font-bold leading-tight tracking-tight;
+}
+
+.Pinpoint.Blog_Entry .Pinpoint.Blog_Metadata {
+	@apply mt-4 text-xl;
+}
+
+.Pinpoint.Blog_Entry .Pinpoint.Author {
+	@apply mt-4;
+}
+
+.Pinpoint.Blog_Entry .actions {
+	@apply mt-5 flex justify-between md:justify-start items-center;
+}
+
+.Pinpoint.Blog_Entry .actions .Pinpoint.Clap {
+	@apply ml-5;
+}
+
+.Pinpoint.Blog_Entry .covermediaWrapper {
+	@apply max-w-4xl mt-20 mb-20 mx-auto sm:px-8;
+}
+
+.Pinpoint.Blog_Entry .Pinpoint.document {
+	@apply max-w-4xl mx-auto px-4 sm:px-8;
+}
+
+.Pinpoint.document .image_block .image img {
+	@apply rounded-none;
+}
+
+
+/*
+ * Error
+ */
+.Pinpoint.Blog_Error {
+	@apply flex-grow flex flex-col justify-center items-center;	
+}
+
+.Pinpoint.Blog_Error .link {
+	@apply font-bold;
+}

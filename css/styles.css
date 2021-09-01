@@ -220,7 +220,7 @@
  * Group
  */
 .Pinpoint.Blog_Group {
-	@apply my-32;
+	@apply my-16;
 }
 
 .Pinpoint.Blog_Group .constraint > .content {
@@ -361,6 +361,14 @@
 
 .Pinpoint.Blog_Hero .entry p {
 	@apply mt-2 md:mt-4 text-xl;
+}
+
+.Pinpoint.Blog_Group.recent {
+	@apply mt-0;
+}
+
+.Pinpoint.Blog_Group.recent > .constraint > .content {
+	@apply pt-0 border-none;
 }
 
 

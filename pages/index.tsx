@@ -92,8 +92,7 @@ export default function Home(props: HomeProps) {
 				<Group
 					title="Recent Posts"
 					entries={recent}
-					className="!mt-20"
-					contentClassName="!pt-0 border-none"
+					className="recent"
 					viewAllHref="/entries/1"
 				/>
 

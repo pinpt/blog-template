@@ -9,17 +9,10 @@ const Footer = (props: FooterProps) => {
 	return (
 		<>
 			<div className="Pinpoint Blog_Footer">
-
 				<div className="constraint">
-
 					<div className="content">
-
 						<div className="site">
-							<Logo
-								src={site.logoUrl}
-								href={site.theme?.logoLink ?? site.url}
-								title="Footer Logo Home Page"
-							/>
+							<Logo src={site.logoUrl} href={site.theme?.logoLink ?? site.url} title="Footer Logo Home Page" />
 							<div>
 								<h1 className="title">{site.theme?.title ?? site.name}</h1>
 							</div>
@@ -44,15 +37,13 @@ const Footer = (props: FooterProps) => {
 							<Social.RSS className="Prebuilt" href="/rss" newTab />
 						</Social.Bar>
 					</div>
-
 				</div>
-
 			</div>
 
 			<div className="PoweredBy">
 				<PoweredByPinpoint siteId={site.id} />
 			</div>
-		</>	
+		</>
 	);
 };
 

@@ -15,31 +15,25 @@ const InternalServerError = (props: NotFoundErrorProps) => {
 
 	return (
 		<>
-
 			<NextHead>
 				<title>404 Not Found</title>
 				<Head site={site} />
 			</NextHead>
 
 			<div className="Pinpoint Blog_Page">
-
 				<Header site={site} />
 
 				<div className="Pinpoint Blog_Error">
-
 					<Error
 						className="Error 500"
 						error="500 Error"
 						title="Internal Server Error"
 						onClick={() => router.push('/')}
 					/>
-
 				</div>
 
 				<Footer site={site} />
-
 			</div>
-
 		</>
 	);
 };

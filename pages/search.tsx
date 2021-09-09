@@ -1,7 +1,7 @@
 import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
-import { fetchSite, Head, Loader, Pagination, Prebuilt, Search, useSearch } from '@pinpt/react';
+import { fetchSite, Head, Loader, Pagination, Search, useSearch } from '@pinpt/react';
 import config from '../pinpoint.config';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -20,10 +20,7 @@ export default function SearchPage(props: SearchProps) {
 	const term = (router?.query?.term as string) ?? '';
 	const { results, loading } = useSearch(term, [], config.siteId);
 
-	const title = useMemo(
-		() => `Search results for ${term} - ${site.theme?.title ?? site.name}`,
-		[term, site]
-	);
+	const title = useMemo(() => `Search results for ${term} - ${site.theme?.title ?? site.name}`, [term, site]);
 
 	return (
 		<>
@@ -33,15 +30,11 @@ export default function SearchPage(props: SearchProps) {
 			</NextHead>
 
 			<div className="Pinpoint Blog_Page">
-
 				<Header site={site} searchTerm={term} />
 
 				<div className="Pinpoint Blog_Search_Results">
-
 					<div className="constraint">
-
 						<div className="content">
-
 							{loading ? (
 								<div className="loaderWrapper">
 									<Loader />
@@ -49,7 +42,10 @@ export default function SearchPage(props: SearchProps) {
 							) : (
 								<>
 									<div className="heading">
-										<h2>{results?.length === 0 ? 'No results ' : 'Results '}for <span className="search-term">{term}</span></h2>
+										<h2>
+											{results?.length === 0 ? 'No results ' : 'Results '}for{' '}
+											<span className="search-term">{term}</span>
+										</h2>
 										<Link href="/">
 											<a>
 												<svg
@@ -74,22 +70,16 @@ export default function SearchPage(props: SearchProps) {
 										</Link>
 									</div>
 
-									{results.length > 0 && (
-										<Entries entries={results} />
-									)}
+									{results.length > 0 && <Entries entries={results} />}
 								</>
 							)}
-
 						</div>
-
 					</div>
-
 				</div>
 
 				<Signup />
 
 				<Footer site={site} />
-
 			</div>
 		</>
 	);

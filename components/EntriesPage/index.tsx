@@ -31,15 +31,11 @@ const EntriesPage = (props: IEntriesPageProps) => {
 			</NextHead>
 
 			<div className="Pinpoint Blog_Page">
-
 				<Header site={site} />
 
 				<div className="Pinpoint Blog_Entries_Page">
-
 					<div className="constraint">
-
 						<div className="content">
-
 							<div className="heading">
 								<h2>
 									{title}
@@ -77,11 +73,8 @@ const EntriesPage = (props: IEntriesPageProps) => {
 							</div>
 
 							<Entries entries={content} />
-
 						</div>
-
 					</div>
-
 				</div>
 
 				<div className="Pinpoint Blog_Pagination">
@@ -94,8 +87,8 @@ const EntriesPage = (props: IEntriesPageProps) => {
 								pageNumber > 2 && before
 									? () => router.push(`${path}/${pageNumber - 1}/${before.dateAt}/${pageCount}`)
 									: pageNumber === 2
-										? () => router.push(`${path}/1`)
-										: undefined
+									? () => router.push(`${path}/1`)
+									: undefined
 							}
 						/>
 					</div>
@@ -104,7 +97,6 @@ const EntriesPage = (props: IEntriesPageProps) => {
 				<Signup />
 
 				<Footer site={site} />
-
 			</div>
 		</>
 	);

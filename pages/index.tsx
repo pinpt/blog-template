@@ -10,7 +10,6 @@ import {
 	IContent,
 	ISite,
 	Pagination,
-	Prebuilt,
 	titleCase,
 } from '@pinpt/react';
 import config from '../pinpoint.config';
@@ -30,7 +29,7 @@ interface HomeProps {
 		path: string;
 		title: string;
 		content: IContent[];
-	}[]
+	}[];
 }
 
 export default function Home(props: HomeProps) {
@@ -50,63 +49,37 @@ export default function Home(props: HomeProps) {
 			</NextHead>
 
 			<div className="Pinpoint Blog_Page">
-
 				<Header site={site} />
 
 				<div className="Pinpoint Blog_Hero">
-
 					<div className="constraint">
-
 						<a onClick={() => router.push(new URL(latest.url).pathname)} className="entry">
-
 							{latest.coverMedia?.placeholderImage ? (
-								<img
-									src={latest.coverMedia.placeholderImage}
-									alt={latest.headline}
-								/>
+								<img src={latest.coverMedia.placeholderImage} alt={latest.headline} />
 							) : (
 								<div className="no-image" />
 							)}
-				
-							<div className="content">
 
+							<div className="content">
 								<Metadata entry={latest} />
 
-								<h2>
-									{latest.title}
-								</h2>
-								
-								<p>
-									{latest.headline}
-								</p>
+								<h2>{latest.title}</h2>
 
+								<p>{latest.headline}</p>
 							</div>
 						</a>
-
 					</div>
-
 				</div>
 
 				<Signup />
 
-				<Group
-					title="Recent Posts"
-					entries={recent}
-					className="recent"
-					viewAllHref="/entries/1"
-				/>
+				<Group title="Recent Posts" entries={recent} className="recent" viewAllHref="/entries/1" />
 
 				{groups?.map((group) => (
-					<Group
-						key={group.title}
-						title={group.title}
-						entries={group.content}
-						viewAllHref={`${group.path}/1`}
-					/>
+					<Group key={group.title} title={group.title} entries={group.content} viewAllHref={`${group.path}/1`} />
 				))}
 
 				<Footer site={site} />
-
 			</div>
 		</>
 	);
@@ -123,22 +96,23 @@ export async function getStaticProps() {
 		fetchAnalytics(
 			config,
 			content.map((e) => e.id)
-		)
+		),
 	]);
 
 	const tagsEntries = await Promise.all(
-		config.tags.map((tag) => fetchContentPaginated(config, {
-			limit: config.groupSize,
-			tag
-		}))
+		config.tags.map((tag) =>
+			fetchContentPaginated(config, {
+				limit: config.groupSize,
+				tag,
+			})
+		)
 	);
 
 	const groups = config.tags.map((tag, index) => ({
 		title: titleCase(tag),
 		path: `/tag/${tag}`,
-		content: tagsEntries[index].content
-	}))
-	
+		content: tagsEntries[index].content,
+	}));
 
 	// const pageCount = Math.ceil(count / config.pageSize);
 

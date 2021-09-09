@@ -10,20 +10,11 @@ export interface IGroupProps {
 	viewAllHref?: string;
 }
 
-const Group = ({
-	className = '',
-	contentClassName = '',
-	entries,
-	title,
-	viewAllHref = '#',
-}: IGroupProps) => {
+const Group = ({ className = '', contentClassName = '', entries, title, viewAllHref = '#' }: IGroupProps) => {
 	return (
 		<div className={`Pinpoint Blog_Group ${className}`}>
-
 			<div className="constraint">
-
 				<div className={`content ${contentClassName}`}>
-
 					<div className="heading">
 						<h2>{title}</h2>
 						<Link href={viewAllHref}>
@@ -51,11 +42,8 @@ const Group = ({
 					</div>
 
 					<Entries entries={entries} />
-
 				</div>
-
 			</div>
-
 		</div>
 	);
 };

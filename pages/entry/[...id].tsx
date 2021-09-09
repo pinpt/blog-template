@@ -17,13 +17,12 @@ import {
 	ISite,
 	Pagination,
 	Pinpoint,
-	Prebuilt,
 	Social,
 } from '@pinpt/react';
 import config from '../../pinpoint.config';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { CoverMedia } from '@pinpt/react/dist/components/Renderer';
+import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
 import Signup from '../../components/Signup';
 import Metadata from '../../components/Metadata';
 
@@ -76,7 +75,6 @@ export default function EntryPage(props: EntryPageProps) {
 			</NextHead>
 
 			<div className="Pinpoint Blog_Page">
-
 				<Header site={site} />
 
 				{preview && <PreviewBanner />}
@@ -85,7 +83,6 @@ export default function EntryPage(props: EntryPageProps) {
 					{(_ready, ref) => (
 						<>
 							<div className="Pinpoint Blog_Entry">
-
 								<div className="constraint">
 									<h1>{content.title}</h1>
 
@@ -130,7 +127,6 @@ export default function EntryPage(props: EntryPageProps) {
 								</div>
 
 								<section>
-
 									{content.coverMedia ? (
 										<div className="covermediaWrapper">
 											<CoverMedia media={content.coverMedia} title={content.title} />
@@ -138,33 +134,26 @@ export default function EntryPage(props: EntryPageProps) {
 									) : null}
 
 									<Document node={content.document} />
-
 								</section>
-
 							</div>
 						</>
 					)}
 				</Pinpoint>
 
 				<div className="Pinpoint Blog_Pagination">
-				
 					<div className="constraint">
-
 						<Pagination
 							goBackText={<Pagination.GoBackWithArrow text={before?.title} />}
 							goBack={() => router.push(new URL(before.url).pathname)}
 							goForwardText={<Pagination.GoForwardWithArrow text={after?.title} />}
 							goForward={() => router.push(new URL(after.url).pathname)}
 						/>
-
 					</div>
-				
 				</div>
 
 				<Signup />
 
 				<Footer site={site} />
-			
 			</div>
 		</>
 	);

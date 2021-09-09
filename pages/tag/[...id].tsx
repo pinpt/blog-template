@@ -1,16 +1,9 @@
 import NextHead from 'next/head';
-import {
-	fetchAnalytics,
-	fetchContentPaginated,
-	fetchSiteWithContentCount,
-	titleCase,
-} from '@pinpt/react';
+import { fetchAnalytics, fetchContentPaginated, fetchSiteWithContentCount, titleCase } from '@pinpt/react';
 import config from '../../pinpoint.config';
 import EntriesPage, { IEntriesPageProps } from '../../components/EntriesPage';
 
-const Page = (props: IEntriesPageProps) => (
-	<EntriesPage {...props} />
-)
+const Page = (props: IEntriesPageProps) => <EntriesPage {...props} />;
 
 export default Page;
 

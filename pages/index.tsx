@@ -2,14 +2,11 @@ import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 import {
 	Analytics,
-	DateLabel,
 	fetchAnalytics,
 	fetchContentPaginated,
-	fetchSiteWithContentCount,
 	Head,
 	IContent,
 	ISite,
-	Pagination,
 	titleCase,
 } from '@pinpt/react';
 import config from '../pinpoint.config';
@@ -51,25 +48,27 @@ export default function Home(props: HomeProps) {
 			<div className="Pinpoint Blog_Page">
 				<Header site={site} />
 
-				<div className="Pinpoint Blog_Hero">
-					<div className="constraint">
-						<a onClick={() => router.push(new URL(latest.url).pathname)} className="entry">
-							{latest.coverMedia?.placeholderImage ? (
-								<img src={latest.coverMedia.placeholderImage} alt={latest.headline} />
-							) : (
-								<div className="no-image" />
-							)}
+				{latest && (
+					<div className="Pinpoint Blog_Hero">
+						<div className="constraint">
+							<a onClick={() => router.push(new URL(latest.url).pathname)} className="entry">
+								{latest.coverMedia?.placeholderImage ? (
+									<img src={latest.coverMedia.placeholderImage} alt={latest.headline} />
+								) : (
+									<div className="no-image" />
+								)}
 
-							<div className="content">
-								<Metadata entry={latest} />
+								<div className="content">
+									<Metadata entry={latest} />
 
-								<h2>{latest.title}</h2>
+									<h2>{latest.title}</h2>
 
-								<p>{latest.headline}</p>
-							</div>
-						</a>
+									<p>{latest.headline}</p>
+								</div>
+							</a>
+						</div>
 					</div>
-				</div>
+				)}
 
 				<Signup />
 

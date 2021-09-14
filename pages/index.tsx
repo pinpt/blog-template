@@ -21,7 +21,6 @@ interface HomeProps {
 	content: IContent[];
 	after?: IContent;
 	analytics: Analytics;
-	// pageCount: number;
 	groups?: {
 		path: string;
 		title: string;
@@ -84,7 +83,7 @@ export default function Home(props: HomeProps) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const { site, content, after } = await fetchContentPaginated(config, {
 		limit: config.recentSize + 1,
 		after: true,
@@ -113,8 +112,6 @@ export async function getStaticProps() {
 		content: tagsEntries[index].content,
 	}));
 
-	// const pageCount = Math.ceil(count / config.pageSize);
-
 	return {
 		props: {
 			site,
@@ -123,6 +120,5 @@ export async function getStaticProps() {
 			analytics,
 			groups,
 		},
-		revalidate: 60, // TODO: set low and cache on proxy
 	};
 }

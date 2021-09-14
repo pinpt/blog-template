@@ -443,11 +443,11 @@
 }
 
 .Pinpoint.Blog_Entry .covermediaWrapper {
-	@apply max-w-4xl mt-20 mb-20 mx-auto sm:px-8;
+	@apply max-w-4xl mt-10 md:mt-20 mx-auto sm:px-8;
 }
 
 .Pinpoint.Blog_Entry .Pinpoint.document {
-	@apply max-w-4xl mx-auto px-4 sm:px-8;
+	@apply max-w-4xl mt-10 md:mt-20 mx-auto px-4 sm:px-8;
 }
 
 .Pinpoint.document .image_block .image img {

@@ -1,6 +1,6 @@
 {
 	"name": "pinpoint",
-	"version": "0.1.13",
+	"version": "0.1.14",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@pinpt/cli": "^1.0.1",
 		"@pinpt/email": "^1.0.0",
-		"@pinpt/react": "^1.0.8",
+		"@pinpt/react": "^1.0.11",
 		"encoding": "^0.1.13",
 		"next": "11.1.0",
 		"react": "17.0.2",

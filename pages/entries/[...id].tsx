@@ -37,7 +37,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: { id: [string, string, string] } }) {
 	const pageNumber = parseInt(params.id[0]);
 	const offset = parseInt(params.id[1] ?? '0');
-	// const pageCount = parseInt(params.id[2] ?? '0');
 
 	const { count } = await fetchSiteWithContentCount(config);
 
@@ -68,6 +67,6 @@ export async function getStaticProps({ params }: { params: { id: [string, string
 			pageCount,
 			analytics,
 		},
-		revalidate: 60, // TODO: set low and cache on proxy
+		revalidate: 1,
 	};
 }

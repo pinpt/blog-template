@@ -1,15 +1,14 @@
-import NextHead from 'next/head';
+import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { useCallback, useMemo } from 'react';
-import { fetchSite, Head, Loader, Pagination, Search, useSearch } from '@pinpt/react';
+import NextHead from 'next/head';
+import Link from 'next/link';
+import { fetchSite, Head, Loader, useSearch } from '@pinpt/react';
+import type { ISite } from '@pinpt/react';
 import config from '../pinpoint.config';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-
-import type { ISite } from '@pinpt/react';
 import Entries from '../components/Entries';
 import Signup from '../components/Signup';
-import Link from 'next/link';
 interface SearchProps {
 	site: ISite;
 }
@@ -85,12 +84,11 @@ export default function SearchPage(props: SearchProps) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const site = await fetchSite(config);
 	return {
 		props: {
 			site,
 		},
-		revalidate: 600 * 5,
 	};
 }

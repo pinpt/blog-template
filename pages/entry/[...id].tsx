@@ -1,13 +1,11 @@
-import NextHead from 'next/head';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import NextHead from 'next/head';
 import {
 	Author,
 	Banner,
 	Clap,
 	createClap,
-	DateLabel,
 	Document,
 	fetchContent,
 	fetchContentAnalytics,
@@ -19,10 +17,10 @@ import {
 	Pinpoint,
 	Social,
 } from '@pinpt/react';
+import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
 import config from '../../pinpoint.config';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
 import Signup from '../../components/Signup';
 import Metadata from '../../components/Metadata';
 
@@ -127,13 +125,13 @@ export default function EntryPage(props: EntryPageProps) {
 								</div>
 
 								<section>
-									{content.coverMedia ? (
+									{content.coverMedia && (
 										<div className="covermediaWrapper">
 											<CoverMedia media={content.coverMedia} title={content.title} />
 										</div>
-									) : null}
+									)}
 
-									<Document node={content.document} />
+									<Document ref={ref} node={content.document} />
 								</section>
 							</div>
 						</>
@@ -196,6 +194,6 @@ export async function getStaticProps({
 			after,
 			preview: !!preview,
 		},
-		revalidate: 60, // TODO: set low and cache on proxy
+		revalidate: 1,
 	};
 }

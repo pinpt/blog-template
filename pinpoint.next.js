@@ -116,6 +116,11 @@ const withPinpointConfig = (config) => {
 	const _config = { ...config };
 	_config.headers = createHeaderWrapper(_config.headers);
 	_config.rewrites = createRewriteWrapper(_config.rewrites);
+	// load up build-time config
+	if (fs.existsSync(path.join(__dirname, 'pinpoint.config.json'))) {
+		const buildConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'pinpoint.config.json')).toString());
+		return { ..._config, ...buildConfig };
+	}
 	return _config;
 };
 

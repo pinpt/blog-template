@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const { apihost, siteId } = require('./pinpoint.config.js');
 const homeurl = (apihost || '').includes('.edge.') ? `https://home.edge.pinpoint.com` : `https://home.pinpoint.com`;
 

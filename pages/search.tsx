@@ -1,14 +1,15 @@
-import { useMemo } from 'react';
-import { useRouter } from 'next/router';
 import NextHead from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { fetchSite, Head, Loader, useSearch } from '@pinpt/react';
-import type { ISite } from '@pinpt/react';
-import config from '../pinpoint.config';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Entries from '../components/Entries';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 import Signup from '../components/Signup';
+import config from '../pinpoint.config';
+
+import type { ISite } from '@pinpt/react';
 interface SearchProps {
 	site: ISite;
 }
@@ -69,7 +70,7 @@ export default function SearchPage(props: SearchProps) {
 										</Link>
 									</div>
 
-									{results.length > 0 && <Entries entries={results} />}
+									{results.length > 0 && <Entries entries={results} site={site} />}
 								</>
 							)}
 						</div>

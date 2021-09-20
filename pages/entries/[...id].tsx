@@ -1,6 +1,6 @@
 import { fetchAnalytics, fetchContentPaginated, fetchSiteWithContentCount } from '@pinpt/react';
-import config from '../../pinpoint.config';
 import EntriesPage, { IEntriesPageProps } from '../../components/EntriesPage';
+import config from '../../pinpoint.config';
 
 const Page = (props: IEntriesPageProps) => <EntriesPage {...props} />;
 

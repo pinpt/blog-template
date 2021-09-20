@@ -1,20 +1,15 @@
 import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 import {
-	Analytics,
-	fetchAnalytics,
-	fetchContentPaginated,
-	Head,
-	IContent,
-	ISite,
-	titleCase,
+	Analytics, fetchAnalytics, fetchContentPaginated, getRouterRelativePath, Head, IContent, ISite,
+	slugifyString, titleCase
 } from '@pinpt/react';
-import config from '../pinpoint.config';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Signup from '../components/Signup';
 import Group from '../components/Group';
+import Header from '../components/Header';
 import Metadata from '../components/Metadata';
+import Signup from '../components/Signup';
+import config from '../pinpoint.config';
 
 interface HomeProps {
 	site: ISite;
@@ -29,7 +24,7 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-	const { site, content, after, analytics, groups } = props;
+	const { site, content, groups } = props;
 	const router = useRouter();
 	const title = site.theme?.description ? `${site.theme.description} - ${site.name}` : site.name;
 
@@ -50,7 +45,7 @@ export default function Home(props: HomeProps) {
 				{latest && (
 					<div className="Pinpoint Blog_Hero">
 						<div className="constraint">
-							<a onClick={() => router.push(new URL(latest.url).pathname)} className="entry">
+							<a onClick={() => router.push(getRouterRelativePath(site, latest.url))} className="entry">
 								{latest.coverMedia?.placeholderImage ? (
 									<img src={latest.coverMedia.placeholderImage} alt={latest.headline} />
 								) : (
@@ -58,7 +53,7 @@ export default function Home(props: HomeProps) {
 								)}
 
 								<div className="content">
-									<Metadata entry={latest} />
+									<Metadata entry={latest} site={site} />
 
 									<h2>{latest.title}</h2>
 
@@ -71,10 +66,16 @@ export default function Home(props: HomeProps) {
 
 				<Signup />
 
-				<Group title="Recent Posts" entries={recent} className="recent" viewAllHref="/entries/1" />
+				<Group title="Recent Posts" site={site} entries={recent} className="recent" viewAllHref="/entries/1" />
 
 				{groups?.map((group) => (
-					<Group key={group.title} title={group.title} entries={group.content} viewAllHref={`${group.path}/1`} />
+					<Group
+						key={group.title}
+						site={site}
+						title={group.title}
+						entries={group.content}
+						viewAllHref={`${group.path}/1`}
+					/>
 				))}
 
 				<Footer site={site} />
@@ -90,6 +91,8 @@ export async function getServerSideProps() {
 		site: true,
 	});
 
+	const tags = site?.theme?.homepage?.tags ?? [];
+
 	const [analytics] = await Promise.all([
 		fetchAnalytics(
 			config,
@@ -98,7 +101,7 @@ export async function getServerSideProps() {
 	]);
 
 	const tagsEntries = await Promise.all(
-		config.tags.map((tag) =>
+		tags.map((tag) =>
 			fetchContentPaginated(config, {
 				limit: config.groupSize,
 				tag,
@@ -106,9 +109,9 @@ export async function getServerSideProps() {
 		)
 	);
 
-	const groups = config.tags.map((tag, index) => ({
+	const groups = tags.map((tag, index) => ({
 		title: titleCase(tag),
-		path: `/tag/${tag}`,
+		path: `/tag/${slugifyString(tag)}`,
 		content: tagsEntries[index].content,
 	}));
 

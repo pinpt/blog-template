@@ -24,6 +24,7 @@
 	--header-border-color: #71717a;
 
 	--sign-up-bg-color: #eff6ff;
+	--sign-up-fg-color: #ffffff;
 
 	/*
 	 * content section
@@ -184,6 +185,10 @@
 	background-color: var(--sign-up-bg-color);
 }
 
+.Pinpoint.Blog_SignUp .button {
+	color: var(--sign-up-fg-color, #ffffff);
+}
+
 .Pinpoint.Blog_SignUp .content {
 	@apply flex flex-col md:flex-row md:justify-between items-start md:items-center;
 }
@@ -247,7 +252,7 @@
 }
 
 .Pinpoint.Blog_Entries .entry {
-	@apply relative cursor-pointer transition-colors duration-200;
+	@apply relative cursor-pointer transition-colors duration-200 border;
 }
 
 .Pinpoint.Blog_Entries .entry::before {
@@ -262,17 +267,21 @@
 }
 
 .Pinpoint.Blog_Entries .entry img {
-	@apply object-cover w-full h-64 bg-gray-100 transition-opacity duration-200;
+	@apply object-cover w-full h-64 bg-gray-100;
+}
+
+.Pinpoint.Blog_Entries .entry .image,
+.Pinpoint.Blog_Entries .entry .no-image {
+	@apply object-center object-cover overflow-hidden rounded-t border-b;
+}
+
+.Pinpoint.Blog_Entries .entry:hover img {
+	@apply scale-110 duration-500 ease-out transition-all object-center object-cover overflow-hidden;
 }
 
 .Pinpoint.Blog_Entries .entry .no-image {
 	@apply h-64 transition-opacity duration-200;
 	background-image: linear-gradient(to right, var(--card-empty-gradient-from), var(--card-empty-gradient-to));
-}
-
-.Pinpoint.Blog_Entries .entry:hover img,
-.Pinpoint.Blog_Entries .entry:hover .no-image {
-	@apply opacity-80;
 }
 
 .Pinpoint.Blog_Entries .entry .content {
@@ -324,7 +333,7 @@
 }
 
 .Pinpoint.Blog_Hero .entry img {
-	@apply md:w-1/2 h-64 md:h-96 object-cover transition-opacity duration-200;
+	@apply md:w-1/2 h-64 md:h-96 object-cover transition-opacity duration-200 rounded;
 }
 
 .Pinpoint.Blog_Hero .entry .no-image {

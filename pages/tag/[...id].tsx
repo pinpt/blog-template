@@ -1,15 +1,16 @@
-import NextHead from 'next/head';
-import { fetchAnalytics, fetchContentPaginated, fetchSiteWithContentCount, titleCase } from '@pinpt/react';
-import config from '../../pinpoint.config';
+import {
+	fetchAnalytics, fetchContentPaginated, fetchSiteWithContentCount, slugifyString, titleCase
+} from '@pinpt/react';
 import EntriesPage, { IEntriesPageProps } from '../../components/EntriesPage';
+import config from '../../pinpoint.config';
 
 const Page = (props: IEntriesPageProps) => <EntriesPage {...props} />;
 
 export default Page;
 
 export async function getStaticPaths() {
-	const tag = config.tags[0];
-
+	const tag = 'feature';
+	//TODO(jhaynie): review this with cbowley as this isn't correct
 	const { count } = await fetchSiteWithContentCount(config, tag);
 	const pages = Math.ceil(count / config.pageSize);
 	const paths = [];
@@ -39,8 +40,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { id: [string, string, string, string] } }) {
-	console.log(params.id);
-
 	const tag = params.id[0];
 	const pageNumber = parseInt(params.id[1]);
 	const offset = parseInt(params.id[2] ?? '0');
@@ -65,7 +64,7 @@ export async function getStaticProps({ params }: { params: { id: [string, string
 
 	return {
 		props: {
-			path: `/tag/${tag}`,
+			path: `/tag/${slugifyString(tag)}`,
 			title: titleCase(tag),
 			site: res.site,
 			content: res.content,

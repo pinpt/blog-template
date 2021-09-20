@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
 import NextHead from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Analytics, Head, IContent, ISite, Pagination } from '@pinpt/react';
+import Entries from '../Entries';
 import Footer from '../Footer';
 import Header from '../Header';
-import Entries from '../Entries';
 import Signup from '../Signup';
 
 export interface IEntriesPageProps {
@@ -72,7 +72,7 @@ const EntriesPage = (props: IEntriesPageProps) => {
 								</Link>
 							</div>
 
-							<Entries entries={content} />
+							<Entries entries={content} site={site} />
 						</div>
 					</div>
 				</div>

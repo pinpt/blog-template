@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import Link from 'next/link';
 import router from 'next/router';
+import { useState } from 'react';
 import { ISite, Logo, Search, ThemeToggle } from '@pinpt/react';
 
 export interface HeaderProps {
@@ -24,7 +25,11 @@ const Header = (props: HeaderProps) => {
 								title="Footer Logo Home Page"
 							/>
 							<div className="ml-4">
-								<h1 className="text-2xl md:!text-3xl">{site.theme?.title ?? site.name}</h1>
+								<Link href="/">
+									<a>
+										<h1 className="text-2xl md:!text-3xl">{site.theme?.title ?? site.name}</h1>
+									</a>
+								</Link>
 							</div>
 						</div>
 

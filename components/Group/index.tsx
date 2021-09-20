@@ -1,8 +1,9 @@
-import { IContent } from '@pinpt/react';
 import Link from 'next/link';
 import Entries from '../Entries';
 
+import type { ISite, IContent } from '@pinpt/react';
 export interface IGroupProps {
+	site: ISite;
 	className?: string;
 	contentClassName?: string;
 	entries: IContent[];
@@ -10,7 +11,7 @@ export interface IGroupProps {
 	viewAllHref?: string;
 }
 
-const Group = ({ className = '', contentClassName = '', entries, title, viewAllHref = '#' }: IGroupProps) => {
+const Group = ({ className = '', contentClassName = '', entries, title, viewAllHref = '#', site }: IGroupProps) => {
 	return (
 		<div className={`Pinpoint Blog_Group ${className}`}>
 			<div className="constraint">
@@ -41,7 +42,7 @@ const Group = ({ className = '', contentClassName = '', entries, title, viewAllH
 						</Link>
 					</div>
 
-					<Entries entries={entries} />
+					<Entries entries={entries} site={site} />
 				</div>
 			</div>
 		</div>

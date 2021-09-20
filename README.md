@@ -1,4 +1,4 @@
-# Pinpoint Application
+# Pinpoint Blog Application Template
 
 Welcome to your Pinpoint application.
 

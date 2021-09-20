@@ -1,28 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import NextHead from 'next/head';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 import {
-	Author,
-	Banner,
-	Clap,
-	createClap,
-	Document,
-	fetchContent,
-	fetchContentAnalytics,
-	fetchContentPaginated,
-	Head,
-	IContent,
-	ISite,
-	Pagination,
-	Pinpoint,
-	Social,
+	Author, Banner, Clap, createClap, Document, fetchContent, fetchContentAnalytics,
+	fetchContentPaginated, getRouterRelativePath, Head, IContent, ISite, Pagination, Pinpoint,
+	slugifyString, Social
 } from '@pinpt/react';
-import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
-import config from '../../pinpoint.config';
-import Header from '../../components/Header';
+import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer/content';
 import Footer from '../../components/Footer';
-import Signup from '../../components/Signup';
+import Header from '../../components/Header';
 import Metadata from '../../components/Metadata';
+import Signup from '../../components/Signup';
+import config from '../../pinpoint.config';
 
 interface EntryPageProps {
 	content: IContent;
@@ -43,6 +32,8 @@ export default function EntryPage(props: EntryPageProps) {
 	const [totalCount, setTotalCount] = useState(0);
 	const [maxed, setMaxed] = useState(false);
 	const contentId = content.id;
+
+	console.log('before', props);
 
 	useEffect(() => {
 		fetchContentAnalytics(config, contentId).then(({ claps }: { claps: number }) => {
@@ -84,7 +75,7 @@ export default function EntryPage(props: EntryPageProps) {
 								<div className="constraint">
 									<h1>{content.title}</h1>
 
-									<Metadata entry={content} />
+									<Metadata entry={content} site={site} />
 
 									{content.authors?.[0] && (
 										<Author
@@ -142,9 +133,9 @@ export default function EntryPage(props: EntryPageProps) {
 					<div className="constraint">
 						<Pagination
 							goBackText={<Pagination.GoBackWithArrow text={before?.title} />}
-							goBack={() => router.push(new URL(before.url).pathname)}
+							goBack={before?.url ? () => router.push(getRouterRelativePath(site, before?.url)) : undefined}
 							goForwardText={<Pagination.GoForwardWithArrow text={after?.title} />}
-							goForward={() => router.push(new URL(after.url).pathname)}
+							goForward={after?.url ? () => router.push(getRouterRelativePath(site, after?.url)) : undefined}
 						/>
 					</div>
 				</div>
@@ -163,7 +154,7 @@ export async function getStaticPaths() {
 	return {
 		paths: content.map(({ id, title }) => ({
 			params: {
-				id: [id, title],
+				id: [id, slugifyString(title)],
 			},
 		})),
 		fallback: 'blocking', // server render on-demand if page doesn't exist

@@ -7,40 +7,8 @@ const Page = (props: IEntriesPageProps) => <EntriesPage {...props} />;
 
 export default Page;
 
-export async function getStaticPaths() {
-	const tag = config.tags[0];
-
-	const { count } = await fetchSiteWithContentCount(config, tag);
-	const pages = Math.ceil(count / config.pageSize);
-	const paths = [];
-
-	let next = 0;
-
-	for (let i = 1; i <= pages; i++) {
-		const res = await fetchContentPaginated(config, {
-			tag,
-			offset: next,
-			limit: config.pageSize,
-			after: true,
-			projection: ['id'],
-		});
-		paths.push({
-			params: {
-				id: [tag, `${i + 1}`, String(next), String(pages)],
-			},
-		});
-		next = res.after?.dateAt ?? 0;
-	}
-
-	return {
-		paths,
-		fallback: 'blocking', // server render on-demand if page doesn't exist
-	};
-}
-
-export async function getStaticProps({ params }: { params: { id: [string, string, string, string] } }) {
-	console.log(params.id);
-
+export async function getServerSideProps(context: any) {
+	const params = context.params;
 	const tag = params.id[0];
 	const pageNumber = parseInt(params.id[1]);
 	const offset = parseInt(params.id[2] ?? '0');
@@ -75,6 +43,5 @@ export async function getStaticProps({ params }: { params: { id: [string, string
 			pageCount,
 			analytics,
 		},
-		revalidate: 1,
 	};
 }

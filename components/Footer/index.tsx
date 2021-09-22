@@ -12,7 +12,7 @@ const Footer = (props: FooterProps) => {
 				<div className="constraint">
 					<div className="content">
 						<div className="site">
-							<Logo src={site.logoUrl} href={site.theme?.logoLink ?? site.url} title="Footer Logo Home Page" />
+							<Logo src={site.logoUrl} href={site.theme?.logoLink ?? site.url} />
 							<div>
 								<h1 className="title">{site.theme?.title ?? site.name}</h1>
 							</div>

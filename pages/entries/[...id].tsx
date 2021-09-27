@@ -1,72 +1,48 @@
-import { fetchAnalytics, fetchContentPaginated, fetchSiteWithContentCount } from '@pinpt/react';
-import config from '../../pinpoint.config';
+import {
+	fetchContentPaginated, fetchSiteWithContentCount, getRouterRelativePath
+} from '@pinpt/react';
 import EntriesPage, { IEntriesPageProps } from '../../components/EntriesPage';
+import config from '../../pinpoint.config';
 
 const Page = (props: IEntriesPageProps) => <EntriesPage {...props} />;
 
 export default Page;
 
-export async function getStaticPaths() {
-	const { count } = await fetchSiteWithContentCount(config);
-	const pages = Math.ceil(count / config.pageSize);
-	const paths = [];
+export async function getServerSideProps({ params }: { params: { id: [string, string, string] } }) {
+	try {
+		const pageNumber = parseInt(params.id[0]);
+		const offset = parseInt(params.id[1] ?? '0');
+		const { count } = await fetchSiteWithContentCount(config);
+		const pageSize = config.pageSize ?? 12;
 
-	let next = 0;
+		const pageCount = Math.ceil(count / pageSize);
 
-	for (let i = 1; i <= pages; i++) {
 		const res = await fetchContentPaginated(config, {
-			offset: next,
-			limit: config.pageSize,
+			offset,
+			limit: pageSize,
+			before: true,
 			after: true,
-			projection: ['id'],
+			site: true,
 		});
-		paths.push({
-			params: {
-				id: [`${i + 1}`, String(next), String(pages)],
+
+		return {
+			props: {
+				path: getRouterRelativePath(res.site!, '/entries'),
+				title: 'Recent Posts',
+				site: res.site,
+				content: res.content,
+				before: res.before,
+				after: res.after,
+				pageNumber,
+				pageCount,
 			},
-		});
-		next = res.after?.dateAt ?? 0;
+		};
+	} catch (ex: any) {
+		if (ex.code === 404) {
+			return {
+				notFound: true,
+			};
+		}
+		throw ex;
 	}
-
-	return {
-		paths,
-		fallback: 'blocking', // server render on-demand if page doesn't exist
-	};
-}
-
-export async function getStaticProps({ params }: { params: { id: [string, string, string] } }) {
-	const pageNumber = parseInt(params.id[0]);
-	const offset = parseInt(params.id[1] ?? '0');
-
-	const { count } = await fetchSiteWithContentCount(config);
-
-	const pageCount = Math.ceil(count / config.pageSize);
-
-	const res = await fetchContentPaginated(config, {
-		offset,
-		limit: config.pageSize,
-		before: true,
-		after: true,
-		site: true,
-	});
-
-	const analytics = await fetchAnalytics(
-		config,
-		res.content.map((e) => e.id)
-	);
-
-	return {
-		props: {
-			path: '/entries',
-			title: 'Recent Posts',
-			site: res.site,
-			content: res.content,
-			before: res.before,
-			after: res.after,
-			pageNumber,
-			pageCount,
-			analytics,
-		},
-		revalidate: 1,
-	};
 }

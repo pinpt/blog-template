@@ -1,28 +1,16 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import NextHead from 'next/head';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 import {
-	Author,
-	Banner,
-	Clap,
-	createClap,
-	Document,
-	fetchContent,
-	fetchContentAnalytics,
-	fetchContentPaginated,
-	Head,
-	IContent,
-	ISite,
-	Pagination,
-	Pinpoint,
-	Social,
+	Author, Banner, Clap, createClap, Document, fetchContent, fetchContentAnalytics,
+	getRouterRelativePath, Head, IContent, ISite, Pagination, Pinpoint, Social
 } from '@pinpt/react';
 import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
-import config from '../../pinpoint.config';
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Signup from '../../components/Signup';
+import Header from '../../components/Header';
 import Metadata from '../../components/Metadata';
+import Signup from '../../components/Signup';
+import config from '../../pinpoint.config';
 
 interface EntryPageProps {
 	content: IContent;
@@ -142,9 +130,9 @@ export default function EntryPage(props: EntryPageProps) {
 					<div className="constraint">
 						<Pagination
 							goBackText={<Pagination.GoBackWithArrow text={before?.title} />}
-							goBack={() => router.push(new URL(before.url).pathname)}
+							goBack={() => router.push(getRouterRelativePath(site, before.url))}
 							goForwardText={<Pagination.GoForwardWithArrow text={after?.title} />}
-							goForward={() => router.push(new URL(after.url).pathname)}
+							goForward={() => router.push(getRouterRelativePath(site, after.url))}
 						/>
 					</div>
 				</div>
@@ -157,43 +145,38 @@ export default function EntryPage(props: EntryPageProps) {
 	);
 }
 
-export async function getStaticPaths() {
-	const { content } = await fetchContentPaginated(config, { limit: 200, projection: ['id', 'title'] });
-
-	return {
-		paths: content.map(({ id, title }) => ({
-			params: {
-				id: [id, title],
-			},
-		})),
-		fallback: 'blocking', // server render on-demand if page doesn't exist
-	};
-}
-
-export async function getStaticProps({
+export async function getServerSideProps({
 	params,
 	preview,
 	previewData,
 }: {
-	params: { id: string; title: string };
+	params: { id: string; title?: string };
 	preview?: boolean;
 	previewData?: any;
 }) {
-	const { content, before, after, site } = await fetchContent(config, params.id[0], {
-		before: true,
-		after: true,
-		site: true,
-		commit: preview ? previewData?.commit : undefined,
-	});
+	try {
+		const { content, before, after, site } = await fetchContent(config, params.id[0], {
+			before: true,
+			after: true,
+			site: true,
+			commit: preview ? previewData?.commit : undefined,
+		});
 
-	return {
-		props: {
-			content,
-			site,
-			before,
-			after,
-			preview: !!preview,
-		},
-		revalidate: 1,
-	};
+		return {
+			props: {
+				content,
+				site,
+				before,
+				after,
+				preview: !!preview,
+			},
+		};
+	} catch (ex: any) {
+		if (ex.code === 404) {
+			return {
+				notFound: true,
+			};
+		}
+		throw ex;
+	}
 }

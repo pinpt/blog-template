@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
 import NextHead from 'next/head';
 import Link from 'next/link';
-import { Analytics, Head, IContent, ISite, Pagination } from '@pinpt/react';
+import { useRouter } from 'next/router';
+import { getRouterRelativePath, Head, IContent, ISite, Pagination } from '@pinpt/react';
+import Entries from '../Entries';
 import Footer from '../Footer';
 import Header from '../Header';
-import Entries from '../Entries';
 import Signup from '../Signup';
 
 export interface IEntriesPageProps {
@@ -16,12 +16,11 @@ export interface IEntriesPageProps {
 	content: IContent[];
 	before?: IContent;
 	after?: IContent;
-	analytics: Analytics;
 }
 
 const EntriesPage = (props: IEntriesPageProps) => {
 	const router = useRouter();
-	const { path, title, content, site, pageNumber, pageCount, before, after, analytics } = props;
+	const { path, title, content, site, pageNumber, pageCount, before, after } = props;
 
 	return (
 		<>
@@ -72,7 +71,7 @@ const EntriesPage = (props: IEntriesPageProps) => {
 								</Link>
 							</div>
 
-							<Entries entries={content} />
+							<Entries entries={content} site={site} />
 						</div>
 					</div>
 				</div>
@@ -81,13 +80,27 @@ const EntriesPage = (props: IEntriesPageProps) => {
 					<div className="constraint">
 						<Pagination
 							goForward={
-								after ? () => router.push(`${path}/${pageNumber + 1}/${after.dateAt}/${pageCount}`) : undefined
+								after
+									? () =>
+											router.push(
+												getRouterRelativePath(
+													site,
+													`${path}/${pageNumber + 1}/${after.dateAt}/${pageCount}`
+												)
+											)
+									: undefined
 							}
 							goBack={
 								pageNumber > 2 && before
-									? () => router.push(`${path}/${pageNumber - 1}/${before.dateAt}/${pageCount}`)
+									? () =>
+											router.push(
+												getRouterRelativePath(
+													site,
+													`${path}/${pageNumber - 1}/${before.dateAt}/${pageCount}`
+												)
+											)
 									: pageNumber === 2
-									? () => router.push(`${path}/1`)
+									? () => router.push(getRouterRelativePath(site, `${path}/1`))
 									: undefined
 							}
 						/>

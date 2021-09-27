@@ -1,29 +1,35 @@
+import Link from 'next/link';
 import router from 'next/router';
-import { IContent } from '@pinpt/react';
+import { getRouterRelativePath } from '@pinpt/react';
 import Metadata from '../Metadata';
 
+import type { IContent, ISite } from '@pinpt/react';
+
 export interface IEntriesProps {
+	site: ISite;
 	entries: IContent[];
 }
 
-const Entries = ({ entries }: IEntriesProps) => (
+const Entries = ({ entries, site }: IEntriesProps) => (
 	<div className="Pinpoint Blog_Entries">
 		{entries.map((entry) => (
-			<a key={entry.id} onClick={() => router.push(new URL(entry.url).pathname)} className="entry">
-				{entry.coverMedia?.placeholderImage ? (
-					<img src={entry.coverMedia.placeholderImage} alt={entry.headline} />
-				) : (
-					<div className="no-image" />
-				)}
+			<Link key={entry.id} href={getRouterRelativePath(site, entry.url)}>
+				<a className="entry">
+					{entry.coverMedia?.placeholderImage ? (
+						<img src={entry.coverMedia.placeholderImage} alt={entry.headline} />
+					) : (
+						<div className="no-image" />
+					)}
 
-				<div className="content">
-					<Metadata entry={entry} />
+					<div className="content">
+						<Metadata entry={entry} />
 
-					<h2>{entry.title}</h2>
+						<h2>{entry.title}</h2>
 
-					<p>{entry.headline}</p>
-				</div>
-			</a>
+						<p>{entry.headline}</p>
+					</div>
+				</a>
+			</Link>
 		))}
 	</div>
 );

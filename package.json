@@ -1,6 +1,6 @@
 {
 	"name": "pinpoint",
-	"version": "0.1.17",
+	"version": "0.1.18",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -17,7 +17,7 @@
 		"@pinpt/email": "^1.0.0",
 		"@pinpt/react": "^1.0.26",
 		"encoding": "^0.1.13",
-		"next": "11.1.2",
+		"next": "^11.1.2",
 		"react": "17.0.2",
 		"react-dom": "17.0.2"
 	},

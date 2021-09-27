@@ -1,9 +1,9 @@
 import NextHead from 'next/head';
 import { useRouter } from 'next/router';
-import { Error, Head, fetchSite, ISite } from '@pinpt/react';
-import config from '../pinpoint.config';
-import Header from '../components/Header';
+import { Error, fetchSite, getRouterRelativePath, Head, ISite } from '@pinpt/react';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
+import config from '../pinpoint.config';
 
 export interface NotFoundErrorProps {
 	site: ISite;
@@ -29,7 +29,7 @@ const NotFoundError = (props: NotFoundErrorProps) => {
 						error="404 Error"
 						title="Page Not Found"
 						description="Sorry, we couldn’t find the page you’re looking for."
-						onClick={() => router.push('/')}
+						onClick={() => router.push(getRouterRelativePath(site, '/'))}
 					/>
 				</div>
 

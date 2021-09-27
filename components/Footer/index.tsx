@@ -1,4 +1,4 @@
-import { ISite, Logo, PoweredByPinpoint, Social } from '@pinpt/react';
+import { getSiteRSSURL, ISite, Logo, PoweredByPinpoint, Social } from '@pinpt/react';
 
 export interface FooterProps {
 	site: ISite;
@@ -34,7 +34,7 @@ const Footer = (props: FooterProps) => {
 							{site.theme?.social?.linkedin && (
 								<Social.LinkedIn className="Prebuilt" href={site.theme.social?.linkedin} newTab />
 							)}
-							<Social.RSS className="Prebuilt" href="/rss" newTab />
+							<Social.RSS className="Prebuilt" href={getSiteRSSURL(site)} newTab />
 						</Social.Bar>
 					</div>
 				</div>

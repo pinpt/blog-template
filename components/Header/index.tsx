@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import Link from 'next/link';
 import router from 'next/router';
-import { ISite, Logo, Search, ThemeToggle } from '@pinpt/react';
+import { useState } from 'react';
+import { getRouterRelativePath, ISite, Logo, Search, ThemeToggle } from '@pinpt/react';
 
 export interface HeaderProps {
 	site: ISite;
@@ -17,13 +18,13 @@ const Header = (props: HeaderProps) => {
 				<div className="content">
 					<div className="static">
 						<div className="logo">
-							<Logo
-								className="flex-shrink-0"
-								src={site.logoUrl}
-								href={site.theme?.logoLink ?? site.url}
-							/>
+							<Logo className="flex-shrink-0" src={site.logoUrl} href={site.theme?.logoLink ?? site.url} />
 							<div className="ml-4">
-								<h1 className="text-2xl md:!text-3xl">{site.theme?.title ?? site.name}</h1>
+								<Link href={getRouterRelativePath(site, '/')}>
+									<a>
+										<h1 className="text-2xl md:!text-3xl">{site.theme?.title ?? site.name}</h1>
+									</a>
+								</Link>
 							</div>
 						</div>
 
@@ -46,7 +47,10 @@ const Header = (props: HeaderProps) => {
 						</button>
 
 						<div className="actions">
-							<Search.Bar defaultValue={searchTerm} onSubmit={(value) => router.push(`/search?term=${value}`)} />
+							<Search.Bar
+								defaultValue={searchTerm}
+								onSubmit={(value) => router.push(getRouterRelativePath(site, `/search?term=${value}`))}
+							/>
 
 							<ThemeToggle />
 

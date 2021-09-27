@@ -21,7 +21,6 @@ const Header = (props: HeaderProps) => {
 								className="flex-shrink-0"
 								src={site.logoUrl}
 								href={site.theme?.logoLink ?? site.url}
-								title="Footer Logo Home Page"
 							/>
 							<div className="ml-4">
 								<h1 className="text-2xl md:!text-3xl">{site.theme?.title ?? site.name}</h1>

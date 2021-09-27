@@ -97,8 +97,10 @@ export async function getServerSideProps() {
 		),
 	]);
 
+	const tags = site?.theme?.homepage?.tags ?? [];
+
 	const tagsEntries = await Promise.all(
-		config.tags.map((tag) =>
+		tags.map((tag) =>
 			fetchContentPaginated(config, {
 				limit: config.groupSize,
 				tag,
@@ -106,7 +108,7 @@ export async function getServerSideProps() {
 		)
 	);
 
-	const groups = config.tags.map((tag, index) => ({
+	const groups = tags.map((tag, index) => ({
 		title: titleCase(tag),
 		path: `/tag/${tag}`,
 		content: tagsEntries[index].content,

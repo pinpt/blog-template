@@ -1,4 +1,5 @@
 import { DateLabel, IContent } from '@pinpt/react';
+import { Fragment } from 'react';
 
 export interface IMetadataProps {
 	className?: string;
@@ -13,10 +14,10 @@ const Metadata = ({ className = '', entry }: IMetadataProps) => (
 
 		<span>
 			{entry?.tags?.map((tag, tagIndex) => (
-				<>
-					<span key={tag}>{tag}</span>
+				<Fragment key={tag}>
+					<span>{tag}</span>
 					{tagIndex < entry.tags!.length - 1 && <span className="separator">&bull;</span>}
-				</>
+				</Fragment>
 			))}
 		</span>
 	</div>

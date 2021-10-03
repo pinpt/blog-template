@@ -6,7 +6,7 @@ const fileApi = `https://file.${config.apihost?.includes('.edge.') ? 'edge.' : '
 class MyDocument extends Document {
 	render() {
 		return (
-			<Html>
+			<Html lang="en">
 				<Head>
 					<link rel="preconnect" href={fileApi} />
 					<link

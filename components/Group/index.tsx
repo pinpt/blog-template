@@ -19,7 +19,7 @@ const Group = ({ className = '', contentClassName = '', entries, title, viewAllH
 					<div className="heading">
 						<h2>{title}</h2>
 						<Link href={viewAllHref}>
-							<a href={viewAllHref}>
+							<a>
 								View All
 								<svg
 									className="icon"

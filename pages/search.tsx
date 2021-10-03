@@ -2,7 +2,7 @@ import NextHead from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { fetchSite, Head, Loader, useSearch } from '@pinpt/react';
+import { fetchSite, getRouterRelativePath, Head, Loader, useSearch } from '@pinpt/react';
 import Entries from '../components/Entries';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -46,7 +46,7 @@ export default function SearchPage(props: SearchProps) {
 											{results?.length === 0 ? 'No results ' : 'Results '}for{' '}
 											<span className="search-term">{term}</span>
 										</h2>
-										<Link href="/">
+										<Link href={getRouterRelativePath(site, '/')}>
 											<a>
 												<svg
 													className="icon"

@@ -1,6 +1,5 @@
 import NextHead from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import {
 	fetchContentPaginated, getRouterRelativePath, Head, IContent, ISite, slugifyString, titleCase
 } from '@pinpt/react';
@@ -24,7 +23,6 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
 	const { site, content, groups } = props;
-	const router = useRouter();
 	const title = site.theme?.description ? `${site.theme.description} - ${site.name}` : site.name;
 	const latest = content?.[0];
 	const recent = content?.slice(1, 7);

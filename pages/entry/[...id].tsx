@@ -2,8 +2,9 @@ import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
-	Author, Banner, Clap, createClap, Document, fetchContent, fetchContentAnalytics,
-	getRouterRelativePath, Head, IContent, ISite, Pagination, Pinpoint, Social
+	Author, Banner, Clap, createClap, Document, EmailShare, FacebookShare, fetchContent,
+	fetchContentAnalytics, getRouterRelativePath, Head, IContent, ISite, LinkedInShare, Pagination,
+	Pinpoint, SocialMediaBar, TwitterShare
 } from '@pinpt/react';
 import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
 import Footer from '../../components/Footer';
@@ -82,27 +83,20 @@ export default function EntryPage(props: EntryPageProps) {
 									)}
 
 									<div className="actions">
-										<Social.Bar className="sharing">
-											<Social.Facebook
-												sharing
-												href={`https://facebook.com/sharer/sharer.php?u=${content.url}`}
+										<SocialMediaBar className="sharing">
+											<FacebookShare href={content.url} newTab />
+											<TwitterShare text={content.headline} href={content.url} newTab />
+											<LinkedInShare
+												title={content.title}
+												summary={content.headline}
+												href={content.url}
 												newTab
 											/>
-											<Social.Twitter
-												sharing
-												href={`https://twitter.com/intent/tweet/?text=${content.headline}&url=${content.url}`}
-												newTab
+											<EmailShare
+												subject={content.title}
+												body={`${site.name} - ${content.title}\n${content.headline}\n\n${content.url}`}
 											/>
-											<Social.LinkedIn
-												sharing
-												href={`https://www.linkedin.com/shareArticle?mini=true&url=${content.url}&title=${site.name} - ${content.title}&summary=${content.headline}`}
-												newTab
-											/>
-											<Social.Email
-												sharing
-												href={`mailto:?subject=${site.name} - ${content.title}&body=${site.name} - ${content.title}%0D%0A${content.headline}%0D%0A${content.url}`}
-											/>
-										</Social.Bar>
+										</SocialMediaBar>
 
 										<Clap
 											clapCount={totalCount}

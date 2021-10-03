@@ -47,7 +47,7 @@ const EntriesPage = (props: IEntriesPageProps) => {
 										</>
 									)}
 								</h2>
-								<Link href="/">
+								<Link href={getRouterRelativePath(site, '/')}>
 									<a>
 										<svg
 											className="icon"

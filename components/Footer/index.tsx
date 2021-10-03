@@ -1,4 +1,7 @@
-import { getSiteRSSURL, ISite, Logo, PoweredByPinpoint, Social } from '@pinpt/react';
+import {
+	FacebookLink, getSiteRSSURL, GithubLink, InstagramLink, ISite, LinkedInLink, Logo,
+	PoweredByPinpoint, RSSLink, SocialMediaBar, TwitterLink
+} from '@pinpt/react';
 
 export interface FooterProps {
 	site: ISite;
@@ -18,24 +21,24 @@ const Footer = (props: FooterProps) => {
 							</div>
 						</div>
 
-						<Social.Bar>
+						<SocialMediaBar>
 							{site.theme?.social?.facebook && (
-								<Social.Facebook className="Prebuilt" href={site.theme.social?.facebook} newTab />
+								<FacebookLink className="Prebuilt" href={site.theme.social?.facebook} newTab />
 							)}
 							{site.theme?.social?.instagram && (
-								<Social.Instagram className="Prebuilt" href={site.theme.social?.instagram} newTab />
+								<InstagramLink className="Prebuilt" href={site.theme.social?.instagram} newTab />
 							)}
 							{site.theme?.social?.twitter && (
-								<Social.Twitter className="Prebuilt" href={site.theme.social?.twitter} newTab />
+								<TwitterLink className="Prebuilt" href={site.theme.social?.twitter} newTab />
 							)}
 							{site.theme?.social?.github && (
-								<Social.Github className="Prebuilt" href={site.theme.social?.github} newTab />
+								<GithubLink className="Prebuilt" href={site.theme.social?.github} newTab />
 							)}
 							{site.theme?.social?.linkedin && (
-								<Social.LinkedIn className="Prebuilt" href={site.theme.social?.linkedin} newTab />
+								<LinkedInLink className="Prebuilt" href={site.theme.social?.linkedin} newTab />
 							)}
-							<Social.RSS className="Prebuilt" href={getSiteRSSURL(site)} newTab />
-						</Social.Bar>
+							<RSSLink className="Prebuilt" href={getSiteRSSURL(site)} newTab />
+						</SocialMediaBar>
 					</div>
 				</div>
 			</div>

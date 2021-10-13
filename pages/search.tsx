@@ -18,7 +18,7 @@ export default function SearchPage(props: SearchProps) {
 	const { site } = props;
 	const router = useRouter();
 	const term = (router?.query?.term as string) ?? '';
-	const { results, loading } = useSearch(term, [], config.siteId);
+	const { results, loading } = useSearch(term, [], site);
 
 	const title = useMemo(() => `Search results for ${term} - ${site.theme?.title ?? site.name}`, [term, site]);
 

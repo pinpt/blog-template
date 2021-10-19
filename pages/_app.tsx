@@ -4,6 +4,7 @@ import 'tailwindcss/tailwind.css';
 import '@pinpt/react/dist/base.css';
 import '@pinpt/react/dist/entry.css';
 import '@pinpt/react/themes/default.css';
+import '@pinpt/react/dist/widget.css';
 import '../css/styles.css';
 
 function MyApp({ Component, pageProps }: AppProps) {

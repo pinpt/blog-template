@@ -1,7 +1,13 @@
 import NextHead from 'next/head';
 import Link from 'next/link';
 import {
-	fetchContentPaginated, getRouterRelativePath, Head, IContent, ISite, slugifyString, titleCase
+	fetchContentPaginated,
+	getRouterRelativePath,
+	Head,
+	IContent,
+	ISite,
+	slugifyString,
+	titleCase,
 } from '@pinpt/react';
 import Footer from '../components/Footer';
 import Group from '../components/Group';

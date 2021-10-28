@@ -1,6 +1,4 @@
-import {
-	fetchContentPaginated, fetchSiteWithContentCount, getRouterRelativePath
-} from '@pinpt/react';
+import { fetchContentPaginated, fetchSiteWithContentCount, getRouterRelativePath } from '@pinpt/react';
 import EntriesPage, { IEntriesPageProps } from '../../components/EntriesPage';
 import config from '../../pinpoint.config';
 

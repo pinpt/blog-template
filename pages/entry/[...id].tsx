@@ -2,9 +2,24 @@ import NextHead from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import {
-	Author, Banner, Clap, createClap, Document, EmailShare, FacebookShare, fetchContent,
-	fetchContentAnalytics, getRouterRelativePath, Head, IContent, ISite, LinkedInShare, Pagination,
-	Pinpoint, SocialMediaBar, TwitterShare
+	Author,
+	Banner,
+	Clap,
+	createClap,
+	Document,
+	EmailShare,
+	FacebookShare,
+	fetchContent,
+	fetchContentAnalytics,
+	getRouterRelativePath,
+	Head,
+	IContent,
+	ISite,
+	LinkedInShare,
+	Pagination,
+	Pinpoint,
+	SocialMediaBar,
+	TwitterShare,
 } from '@pinpt/react';
 import { CoverMedia } from '@pinpt/react/dist/cjs/components/Renderer';
 import Footer from '../../components/Footer';

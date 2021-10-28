@@ -1,6 +1,15 @@
 import {
-	FacebookLink, getSiteRSSURL, GithubLink, InstagramLink, ISite, LinkedInLink, Logo,
-	PoweredByPinpoint, RSSLink, SocialMediaBar, TwitterLink
+	FacebookLink,
+	getSiteRSSURL,
+	GithubLink,
+	InstagramLink,
+	ISite,
+	LinkedInLink,
+	Logo,
+	PoweredByPinpoint,
+	RSSLink,
+	SocialMediaBar,
+	TwitterLink,
 } from '@pinpt/react';
 
 export interface FooterProps {

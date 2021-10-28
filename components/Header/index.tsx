@@ -6,10 +6,11 @@ import { getRouterRelativePath, ISite, Logo, Search, ThemeToggle } from '@pinpt/
 export interface HeaderProps {
 	site: ISite;
 	searchTerm?: string;
+	noSubscribe?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
-	const { site, searchTerm } = props;
+	const { site, searchTerm, noSubscribe = false } = props;
 	const [showActions, setShowActions] = useState(false);
 
 	return (
@@ -54,9 +55,11 @@ const Header = (props: HeaderProps) => {
 
 							<ThemeToggle />
 
-							<a href="/subscription/subscribe" className="button">
-								Sign-up
-							</a>
+							{!noSubscribe && (
+								<a href="/subscription/subscribe" className="button">
+									Sign-up
+								</a>
+							)}
 						</div>
 					</div>
 
